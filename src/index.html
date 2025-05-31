@@ -1,0 +1,90 @@
+<html lang="en" class="w-full h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Search</title>
+    <meta name="description" content="Run video files through an AI model directly in your browser. No uploads needed. Search timestamps using natural language queries.">
+    <meta name="keywords" content="AI video search, transformer.js, browser-based video analysis, video AI, timestamp search, no upload video processing, natural language video search">
+    <meta name="author" content="ToDi0410">
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body class="w-full h-full">
+    <div class="App w-full h-full p-4 flex flex-col gap-4">
+        <div class="ROW flex flex-row flex-wrap w-full h-fit gap-4 *:w-fit *:min-h-fit *:bg-base-200 *:rounded-xl *:p-4">
+            <div class="ModelBox grow basis-1/6">
+                <div class="text-xl mb-4">AI Models</div>
+                <div role="alert" class="alert alert-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span><b>Model:</b> <a href="https://huggingface.co/Xenova/clip-vit-large-patch14?url" class="hover:underline">Xenova/clip-vit-large-patch14</a></span>
+                </div>
+                <div role="alert" class="alert alert-warning alert-soft mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span>Models will only have to be downloaded on first run!<br><b>The initial download may take some time!</b></span>
+                </div>
+                <div class="mt-4">Vision Model: <a id="VISION_MODEL_STATE">Waiting...</a></div>
+                <progress id="VISION_MODEL_BAR" class="progress progress-success w-full" max="100"></progress>
+                <div class="text-sm text-base-content/50">This is the model used for generating the frame embeddings</div>
+
+                <div class="mt-4">Text Model: <a id="TEXT_MODEL_STATE">Waiting...</a></div>
+                <progress id="TEXT_MODEL_BAR" class="progress progress-success w-full" max="100"></progress>
+                <div class="text-sm text-base-content/50">This is the model used for generating the query embedding</div>
+            </div>
+            <div class="UploadBox flex flex-col basis-3/6">
+                <div class="text-xl">Video Upload</div>
+                <video id="VIDEO_PREVIEW" class="w-full h-[50vh] mt-4" controls></video>
+                <button id="VIDEO_UPLOAD" class="btn btn-primary">Upload video</button>
+                <div class="text-sm text-center w-full text-lime-500">You're videos are only "uploaded" to your browser and never uploaded to a server!</div>
+            </div>
+            <div class="AnalysisBox flex flex-col basis-1/6">
+                <div class="text-xl">Video Analysis</div>
+                <div class="mt-4">Extract Frames: <a id="VIDEO_EXTRACT_STATE">Waiting...</a></div>
+                <progress id="VIDEO_EXTRACT_BAR" class="progress progress-secondary w-full" max="100"></progress>
+                <div class="text-sm text-base-content/50">This step extracts the raw frames from the uploaded video in order to analyze them later</div>
+                <div class="mt-4">Analyze Frames: <a id="VIDEO_ANALYZE_STATE">Waiting...</a></div>
+                <progress id="VIDEO_ANALYZE_BAR" class="progress progress-secondary w-full" max="100"></progress>
+                <div class="text-sm text-base-content/50">This step generates embeddings using the AI Model that we use for the search later</div>
+                <div class="mt-4">FPS to Analyze:</div>
+                <input
+                    id="VIDEO_FPS"
+                    type="number"
+                    class="input"
+                    required
+                    placeholder="1"
+                    value="1"
+                />
+                <div class="text-sm text-base-content/50">This is the number of frames per second that should be extracted from the video per second</div>
+            </div>
+        </div>
+
+        <div class="ROW flex flex-row w-full gap-4 *:w-fit *:min-h-fit *:bg-base-200 *:rounded-xl *:p-4">
+            <div class="QueryBox flex flex-col">
+                <div class="text-xl">Query</div>
+                <div class="join">
+                    <input id="QUERY_INPUT" type="text" placeholder="Dog playing at the beach" required />
+                    <button id="QUERY_RUN" class="btn btn-neutral join-item">Search</button>
+                </div>
+                <div class="mt-4">Analyze Query: <a id="QUERY_ANALYZE_STATE">Waiting...</a></div>
+                <progress id="QUERY_ANALYZE_BAR" class="progress progress-info w-full" max="100"></progress>
+                <div class="mt-4">Execute Query: <a id="QUERY_EXECUTE_STATE">Waiting...</a></div>
+                <progress id="QUERY_EXECUTE_BAR" class="progress progress-info w-full" max="100"></progress>
+            </div>
+            <div class="MatchBox flex flex-col flex-grow">
+                <div class="text-xl">Matches</div>
+                <div class="flex flex-row flex-wrap gap-4 *:text-cyan-500 *:hover:underline *:bg-base-300 *:grow *:flex *:flex-col *:items-center *:justify-center" id="MATCHES">
+                    <!-- MATCHES INSERTED HERE -->  
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="SUPPORT" class="absolute top-0 left-0 w-full h-full z-50 bg-base-100/25 backdrop-blur flex flex-col items-center justify-center">
+        <div class="underline">Some of the features below are missing in your browser:</div>
+        <div>JavaScript Support: <a id="SUPPORT_JAVASCRIPT" class="text-error">Missing</a></div>
+        <div>WebGPU Support: <a id="SUPPORT_GPU" class="text-error">Missing</a></div>
+    </div>
+    <script type="module" src="./index.js"></script>
+</body>
+</html>

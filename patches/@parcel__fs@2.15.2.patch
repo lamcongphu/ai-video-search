@@ -1,0 +1,79 @@
+diff --git a/lib/index.js b/lib/index.js
+index b52e7cd3114fa107f3c8417d5c9f325e4e01d423..0693da2e091e4f58ff42c10a6baa872fe12af4bf 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -1108,38 +1108,57 @@ class $2a386c23470d420c$export$c4e0ef2ab73c21e7 {
+     createWriteStream(filePath, options) {
+         // Make createWriteStream atomic
+         let tmpFilePath = $2a386c23470d420c$var$getTempFilePath(filePath);
+-        let failed = false;
+-        const move = async ()=>{
+-            if (!failed) try {
+-                await (0, (/*@__PURE__*/$parcel$interopDefault($07c33d31980d7367$exports))).promises.rename(tmpFilePath, filePath);
++        const move = async () => {
++            const fsPromises = (0, ($parcel$interopDefault($07c33d31980d7367$exports))).promises;
++            const exists = (p) => {
++                try {
++                    return (0, $5X5qb$fs).existsSync(p);
++                } catch (e) {
++                    return false;
++                }
++            };
++            try {
++                if (!exists(tmpFilePath)) return;
++                if (exists(filePath)) {
++                    await fsPromises.unlink(filePath);
++                }
++                await fsPromises.rename(tmpFilePath, filePath);
+             } catch (e) {
+-                // This is adapted from fs-write-stream-atomic. Apparently
+-                // Windows doesn't like renaming when the target already exists.
+-                if (process.platform === 'win32' && e.syscall && e.syscall === 'rename' && e.code && e.code === 'EPERM') {
++                // For Windows: if rename fails with EPERM, compare hashes
++                if (
++                    process.platform === 'win32' &&
++                    e.syscall &&
++                    e.syscall === 'rename' &&
++                    e.code &&
++                    e.code === 'EPERM'
++                ) {
+                     let [hashTmp, hashTarget] = await Promise.all([
+                         (0, $5X5qb$parcelutils.hashFile)(this, tmpFilePath),
+                         (0, $5X5qb$parcelutils.hashFile)(this, filePath)
+                     ]);
+-                    await this.unlink(tmpFilePath);
+-                    if (hashTmp != hashTarget) throw e;
++                    await fsPromises.unlink(tmpFilePath);
++                    if (hashTmp !== hashTarget) throw e;
++                } else {
++                    throw e;
+                 }
+             }
+         };
+-        let writeStream = (0, (/*@__PURE__*/$parcel$interopDefault($07c33d31980d7367$exports))).createWriteStream(tmpFilePath, {
++        let writeStream = (0, ($parcel$interopDefault($07c33d31980d7367$exports))).createWriteStream(tmpFilePath, {
+             ...options,
+             fs: {
+-                ...(0, (/*@__PURE__*/$parcel$interopDefault($07c33d31980d7367$exports))),
+-                close: (fd, cb)=>{
+-                    (0, (/*@__PURE__*/$parcel$interopDefault($07c33d31980d7367$exports))).close(fd, (err)=>{
++                ...(0, ($parcel$interopDefault($07c33d31980d7367$exports))),
++                close: (fd, cb) => {
++                    (0, ($parcel$interopDefault($07c33d31980d7367$exports))).close(fd, (err) => {
+                         if (err) cb(err);
+-                        else move().then(()=>cb(), (err)=>cb(err));
++                        else move().then(() => cb(), (err) => cb(err));
+                     });
+                 }
+             }
+         });
+-        writeStream.once('error', ()=>{
+-            failed = true;
+-            (0, (/*@__PURE__*/$parcel$interopDefault($07c33d31980d7367$exports))).unlinkSync(tmpFilePath);
++        writeStream.once('error', () => {
++            if ((0, $5X5qb$fs).existsSync(tmpFilePath)) {
++                (0, ($parcel$interopDefault($07c33d31980d7367$exports))).unlinkSync(tmpFilePath);
++            }
+         });
+         return writeStream;
+     }

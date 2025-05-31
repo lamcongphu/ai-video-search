@@ -101,17 +101,6 @@ async function handleQuery() {
 }
 document.querySelector("#QUERY_RUN").addEventListener("click", handleQuery);
 
-async function checkGPU() {
-    if(!navigator.gpu) return false;
-    try {
-        const adapter = await navigator.gpu.requestAdapter();
-        const device = await adapter.requestDevice();
-        return true;
-    } catch(err) {
-        return false;
-    }
-}
-
 async function startup() {
     document.querySelector("#NO_JS").classList.add("hidden");
     const mlDevice = await getMLDevice();

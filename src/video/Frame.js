@@ -21,8 +21,8 @@ export class Frame {
             const ctx = canvas.getContext("2d");
 
             this.video.onseeked = () => {
-                canvas.width = this.video.videoWidth;
-                canvas.height = this.video.videoHeight;
+                canvas.width = 224;
+                canvas.height = 224;
                 ctx.drawImage(this.video, 0, 0, canvas.width, canvas.height);
 
                 canvas.toBlob(async (blob) => {

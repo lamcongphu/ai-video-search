@@ -21,7 +21,7 @@ export class CLIPTextEmbedder {
         this.tokenizer = await AutoTokenizer.from_pretrained(this.modelName);
         console.log("[CLIPTextEmbedder]", "Loaded tokenizer!");
         this.model = await CLIPTextModelWithProjection.from_pretrained(this.modelName, { 
-            device: getMLDevice(),
+            device: await getMLDevice(),
             progress_callback
         });
         console.log("[CLIPTextEmbedder]", "Loaded model '" + this.modelName + "'!");

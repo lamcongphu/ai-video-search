@@ -21,7 +21,7 @@ export class CLIPVisionEmbedder {
         this.processor = await AutoProcessor.from_pretrained(this.modelName);
         console.log("[CLIPVisionEmbedder]", "Loaded processor!");
         this.model = await CLIPVisionModelWithProjection.from_pretrained(this.modelName, { 
-            device: getMLDevice(),
+            device: await getMLDevice(),
             progress_callback
         });
         console.log("[CLIPVisionEmbedder]", "Loaded model '" + this.modelName + "'!");

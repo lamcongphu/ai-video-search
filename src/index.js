@@ -1,6 +1,8 @@
 import { getMLDevice, textEmbedder, visionEmbedder } from "./ml/ML.js";
 import { getFramesPerSecond, getVideoFile } from "./video/FrameExtractor.js";
+import { Plotter } from "./video/Plotter.js";
 
+const queryPlotter = new Plotter(document.querySelector("#QUERY_GRAPH"));
 let frames = [];
 
 async function handleUpload() {
@@ -72,7 +74,7 @@ async function handleQuery() {
     document.querySelector("#QUERY_ANALYZE_STATE").innerHTML = `Analyzed!`;
     document.querySelector("#QUERY_ANALYZE_BAR").value = 100;
 
-    //Sort frame embeddings by text
+    //Compare frame embeddings to text embedding
     document.querySelector("#QUERY_EXECUTE_STATE").innerHTML = `Analyzing...`;
     for(const [index, frame] of Object.entries(frames)) {
         await frame.compareToQuery(textEmbedding);
@@ -83,7 +85,11 @@ async function handleQuery() {
     document.querySelector("#QUERY_EXECUTE_STATE").innerHTML = `Done!`;
     document.querySelector("#QUERY_EXECUTE_BAR").value = 100;
 
-    const sortedFrameEmbeddings = frames.sort((a,b) => b.querySimilarity - a.querySimilarity);
+    //Draw similarityGraph
+    queryPlotter.plot(frames.map(a => a.querySimilarity));
+
+    //Sort frame embeddings
+    const sortedFrameEmbeddings = [...frames].sort((a,b) => b.querySimilarity - a.querySimilarity);
 
     //Draw top 10 matches
     document.querySelector("#MATCHES").innerHTML = "";

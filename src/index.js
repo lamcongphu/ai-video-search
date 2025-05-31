@@ -1,4 +1,4 @@
-import { textEmbedder, visionEmbedder } from "./ml/ML.js";
+import { getMLDevice, textEmbedder, visionEmbedder } from "./ml/ML.js";
 import { getFramesPerSecond, getVideoFile } from "./video/FrameExtractor.js";
 
 let frames = [];
@@ -113,15 +113,11 @@ async function checkGPU() {
 }
 
 async function startup() {
-    document.querySelector("#SUPPORT_JAVASCRIPT").innerHTML = "Present";
-    document.querySelector("#SUPPORT_JAVASCRIPT").classList.add("!text-green-500");
-
-    if(!await checkGPU()) return;
-    document.querySelector("#SUPPORT_GPU").innerHTML = "Present";
-    document.querySelector("#SUPPORT_GPU").classList.add("!text-green-500");
-
-    document.querySelector("#SUPPORT").classList.add("hidden");
-
+    document.querySelector("#NO_JS").classList.add("hidden");
+    const mlDevice = await getMLDevice();
+    console.log("ML Device", mlDevice);
+    if(mlDevice != "wasm") document.querySelector("#NO_ACCEL").classList.add("hidden");
+    
     await visionEmbedder.load((data) => {
         if(data.status == "done") document.querySelector("#VISION_MODEL_STATE").innerHTML = "Ready!";
         if(data.status == "progress") {

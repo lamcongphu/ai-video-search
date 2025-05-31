@@ -1,5 +1,6 @@
 import { AutoProcessor, CLIPVisionModelWithProjection, RawImage } from '@huggingface/transformers';
 import { CLIPEmbedding } from './CLIPEmbedding';
+import { getMLDevice } from './ML';
 
 export class CLIPVisionEmbedder {
 
@@ -20,7 +21,7 @@ export class CLIPVisionEmbedder {
         this.processor = await AutoProcessor.from_pretrained(this.modelName);
         console.log("[CLIPVisionEmbedder]", "Loaded processor!");
         this.model = await CLIPVisionModelWithProjection.from_pretrained(this.modelName, { 
-            device: "webgpu",
+            device: getMLDevice(),
             progress_callback
         });
         console.log("[CLIPVisionEmbedder]", "Loaded model '" + this.modelName + "'!");

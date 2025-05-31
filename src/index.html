@@ -41,6 +41,12 @@
             </div>
             <div class="AnalysisBox flex flex-col basis-1/6">
                 <div class="text-xl">Video Analysis</div>
+                <div id="NO_ACCEL" role="alert" class="alert alert-error alert-soft mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span>You're browser does not support WebGPU or WebNN! <b>This will result in VERY BAD performance!</b> Try enabling these features for improved performance!</span>
+                </div>
                 <div class="mt-4">Extract Frames: <a id="VIDEO_EXTRACT_STATE">Waiting...</a></div>
                 <progress id="VIDEO_EXTRACT_BAR" class="progress progress-secondary w-full" max="100"></progress>
                 <div class="text-sm text-base-content/50">This step extracts the raw frames from the uploaded video in order to analyze them later</div>
@@ -80,10 +86,9 @@
             </div>
         </div>
     </div>
-    <div id="SUPPORT" class="absolute top-0 left-0 w-full h-full z-50 bg-base-100/25 backdrop-blur flex flex-col items-center justify-center">
-        <div class="underline">Some of the features below are missing in your browser:</div>
-        <div>JavaScript Support: <a id="SUPPORT_JAVASCRIPT" class="text-error">Missing</a></div>
-        <div>WebGPU Support: <a id="SUPPORT_GPU" class="text-error">Missing</a></div>
+    <div id="NO_JS" class="absolute top-0 left-0 w-full h-full z-50 bg-base-100/25 backdrop-blur flex flex-col items-center justify-center">
+        <div class="underline text-error">Your browser does not support JavaScript!</div>
+        <div>Try enabling JavaScript or updating your browser</div>
     </div>
     <script type="module" src="./index.js"></script>
 </body>

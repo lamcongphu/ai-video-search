@@ -116,7 +116,7 @@ async function startup() {
     document.querySelector("#NO_JS").classList.add("hidden");
     const mlDevice = await getMLDevice();
     console.log("ML Device", mlDevice);
-    if(mlDevice != "wasm") document.querySelector("#NO_ACCEL").classList.add("hidden");
+    if(mlDevice == "webgpu") document.querySelector("#NO_ACCEL").classList.add("hidden");
     
     await visionEmbedder.load((data) => {
         if(data.status == "done") document.querySelector("#VISION_MODEL_STATE").innerHTML = "Ready!";

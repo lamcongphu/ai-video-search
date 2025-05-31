@@ -14,15 +14,11 @@
             <div class="ModelBox grow basis-1/6">
                 <div class="text-xl mb-4">AI Models</div>
                 <div role="alert" class="alert alert-info">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <img src="../assets/material-symbols--info-rounded.svg">
                     <span><b>Model:</b> <a href="https://huggingface.co/Xenova/clip-vit-large-patch14?url" class="hover:underline">Xenova/clip-vit-large-patch14</a></span>
                 </div>
                 <div role="alert" class="alert alert-warning alert-soft mt-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
+                    <img src="../assets/material-symbols--warning-rounded.svg">
                     <span>Models will only have to be downloaded on first run!<br><b>The initial download may take some time!</b></span>
                 </div>
                 <div class="mt-4">Vision Model: <a id="VISION_MODEL_STATE">Waiting...</a></div>
@@ -42,10 +38,8 @@
             <div class="AnalysisBox flex flex-col basis-1/6">
                 <div class="text-xl">Video Analysis</div>
                 <div id="NO_ACCEL" role="alert" class="alert alert-error alert-soft mt-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                    <span>You're browser does not support WebGPU or WebNN! <b>This will result in VERY BAD performance!</b> Try enabling these features for improved performance!</span>
+                    <img src="../assets/material-symbols--error-rounded.svg">
+                    <span>You're browser does not support WebGPU! <b>This will result in VERY BAD performance!</b> Try enabling these features for improved performance!</span>
                 </div>
                 <div class="mt-4">Extract Frames: <a id="VIDEO_EXTRACT_STATE">Waiting...</a></div>
                 <progress id="VIDEO_EXTRACT_BAR" class="progress progress-secondary w-full" max="100"></progress>

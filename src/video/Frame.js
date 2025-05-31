@@ -20,10 +20,27 @@ export class Frame {
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
 
+            const targetSize = 336;
+            canvas.width = targetSize;
+            canvas.height = targetSize;
+
             this.video.onseeked = () => {
-                canvas.width = 224;
-                canvas.height = 224;
-                ctx.drawImage(this.video, 0, 0, canvas.width, canvas.height);
+                const videoW = this.video.videoWidth;
+                const videoH = this.video.videoHeight;
+
+                // Fill background with black (optional: ctx.fillStyle = "#000000" is default)
+                ctx.fillRect(0, 0, targetSize, targetSize);
+
+                // Calculate scaling factor
+                const scale = Math.min(targetSize / videoW, targetSize / videoH);
+                const newW = videoW * scale;
+                const newH = videoH * scale;
+
+                const dx = (targetSize - newW) / 2;
+                const dy = (targetSize - newH) / 2;
+
+                // Draw resized video frame centered
+                ctx.drawImage(this.video, dx, dy, newW, newH);
 
                 canvas.toBlob(async (blob) => {
                     if (!blob) return reject(new Error("Failed to get blob"));

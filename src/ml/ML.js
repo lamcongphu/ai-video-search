@@ -17,5 +17,5 @@ export async function getMLDevice() {
     return await checkGPU() ? "webgpu" : navigator.ml ? "webnn" : "wasm";
 }
 
-export const visionEmbedder = new CLIPVisionEmbedder('Xenova/clip-vit-large-patch14');
-export const textEmbedder = new CLIPTextEmbedder('Xenova/clip-vit-large-patch14');
+export const visionEmbedder = new CLIPVisionEmbedder('Xenova/clip-vit-large-patch14-336');
+export const textEmbedder = new CLIPTextEmbedder('Xenova/clip-vit-large-patch14-336');

@@ -10,8 +10,8 @@
 </head>
 <body class="w-full h-full">
     <div class="App w-full h-full p-4 flex flex-col gap-4">
-        <div class="ROW flex flex-row flex-wrap w-full h-fit gap-4 *:w-fit *:min-h-fit *:bg-base-200 *:rounded-xl *:p-4">
-            <div class="ModelBox grow basis-1/6">
+        <div class="ROW flex flex-row flex-wrap w-full h-fit gap-4 *:w-fit *:min-h-fit *:bg-base-200 *:rounded-xl *:p-4 *:grow">
+            <div class="ModelBox">
                 <div class="text-xl mb-4">AI Models</div>
                 <div role="alert" class="alert alert-info">
                     <img src="../assets/material-symbols--info-rounded.svg">
@@ -29,17 +29,17 @@
                 <progress id="TEXT_MODEL_BAR" class="progress progress-success w-full" max="100"></progress>
                 <div class="text-sm text-base-content/50">This is the model used for generating the query embedding</div>
             </div>
-            <div class="UploadBox flex flex-col basis-3/6">
+            <div class="UploadBox flex flex-col">
                 <div class="text-xl">Video Upload</div>
-                <video id="VIDEO_PREVIEW" class="w-full h-[50vh] mt-4" controls></video>
+                <video id="VIDEO_PREVIEW" class="w-full h-[25vh] mt-4" controls></video>
                 <button id="VIDEO_UPLOAD" class="btn btn-primary">Upload video</button>
                 <div class="text-sm text-center w-full text-lime-500">You're videos are only "uploaded" to your browser and never uploaded to a server!</div>
             </div>
-            <div class="AnalysisBox flex flex-col basis-1/6">
+            <div class="AnalysisBox flex flex-col">
                 <div class="text-xl">Video Analysis</div>
                 <div id="NO_ACCEL" role="alert" class="alert alert-error alert-soft mt-4">
                     <img src="../assets/material-symbols--error-rounded.svg">
-                    <span>You're browser does not support WebGPU! <b>This will result in VERY BAD performance!</b> Try enabling these features for improved performance!</span>
+                    <span>You're browser does not support WebGPU!<br>This will result in VERY BAD performance!</b><br>Try enabling these features for improved performance!</span>
                 </div>
                 <div class="mt-4">Extract Frames: <a id="VIDEO_EXTRACT_STATE">Waiting...</a></div>
                 <progress id="VIDEO_EXTRACT_BAR" class="progress progress-secondary w-full" max="100"></progress>
@@ -60,8 +60,8 @@
             </div>
         </div>
 
-        <div class="ROW flex flex-row w-full gap-4 *:w-fit *:min-h-fit *:bg-base-200 *:rounded-xl *:p-4">
-            <div class="QueryBox flex flex-col">
+        <div class="ROW flex flex-row flex-wrap w-full gap-4 *:w-fit *:min-h-fit *:bg-base-200 *:rounded-xl *:p-4 *:grow">
+            <div class="QueryBox flex flex-col max-w-96">
                 <div class="text-xl">Query</div>
                 <div class="join">
                     <input id="QUERY_INPUT" type="text" placeholder="Dog playing at the beach" required />

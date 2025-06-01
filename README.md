@@ -8,8 +8,8 @@ Make sure you are running the latest Chrome Browser or any other browser with <b
 # ✨ How it works?
 This app utilizes the `transformers.js` library for running CLIP models directly in your browser.  
 Utilizing the `Xenova/clip-vit-large-patch14-336` model, we can generate both visual and textual embeddings.  
-We generates embeddings for each frame in the video as well as for the text query.   
-After that we can simply compare the frame embeddings to the query embedding (cosineSimilarity) and calculate a match score.  
+We generate embeddings for each frame in the video as well as for the text query.   
+After that we can simply compare the frame embeddings to the query embedding (cosineSimilarity).  
 
 # 📝License & Attribution
 - [Xenova/clip-vit-large-patch14-336](https://huggingface.co/Xenova/clip-vit-large-patch14-336) - by Xenova

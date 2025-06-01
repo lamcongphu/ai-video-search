@@ -1,5 +1,5 @@
 # 🤖🔎🎞️ AI Video Search
-Find key moments in an video using natural language queries - powered by AI and running fully local in your browser powered by `transformers.js`.
+Find key moments in an video using natural language queries - powered by AI and running fully local in your browser via `transformers.js`.
 
 # 🛠 Usage
 Go to the prebuilt GitHub Page: [tobidi0410.github.io/ai-video-search/](https://tobidi0410.github.io/ai-video-search/)   

@@ -86,7 +86,7 @@ async function handleQuery() {
     document.querySelector("#QUERY_EXECUTE_BAR").value = 100;
 
     //Draw similarityGraph
-    queryPlotter.plot(frames.map(a => a.querySimilarity));
+    queryPlotter.plot(frames.map(a => [a.timestamp, a.querySimilarity]));
 
     //Sort frame embeddings
     const sortedFrameEmbeddings = [...frames].sort((a,b) => b.querySimilarity - a.querySimilarity);

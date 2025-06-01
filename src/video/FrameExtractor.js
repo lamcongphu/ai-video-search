@@ -24,9 +24,9 @@ export async function loadVideo(file) {
 
 export async function getFramesPerSecond(video, framesPerSecond, progress_callback) {
     const frames = [];
-    const duration = Math.floor(video.duration);
-    const totalFrames = duration*framesPerSecond;
+    const duration = video.duration;
+    const totalFrames = Math.ceil(duration*framesPerSecond)+1;
     for(let frame = 0; frame < totalFrames; frame++)
         frames.push(new Frame(video, frame/framesPerSecond));
     return frames;
-}
+}1

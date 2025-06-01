@@ -4,7 +4,9 @@ export class Plotter {
     width;
     height;
 
-    values = null;
+    minX = 0;
+    rangeX = 0;
+    points = null;
     color = "blue";
 
     constructor(canvas) {
@@ -22,8 +24,8 @@ export class Plotter {
         this.width = rect.width;
         this.height = rect.height;
 
-        if (redraw && this.values) {
-            this.plot(this.values, this.color);
+        if (redraw && this.points) {
+            this.plot(this.points, this.color);
         }
     }
 
@@ -51,30 +53,40 @@ export class Plotter {
         }
     }
 
-    plot(values, color = "blue") {
-        // 🔹 Save for redraw
-        this.values = values;
+    plot(points, color = "blue") {
+        this.points = points;
         this.color = color;
 
         this.clear();
         this.drawGrid();
 
         const ctx = this.ctx;
-        const len = values.length;
+        const len = points.length;
         if (len < 2) return;
 
-        const min = Math.min(...values);
-        const max = Math.max(...values);
-        const range = max - min || 1;
+        // Extract X and Y values for scaling
+        const xVals = points.map(p => p[0]);
+        const yVals = points.map(p => p[1]);
+
+        const minX = Math.min(...xVals);
+        this.minX = minX;
+        const maxX = Math.max(...xVals);
+        const minY = Math.min(...yVals);
+        const maxY = Math.max(...yVals);
+
+        const rangeX = maxX - minX || 1;
+        this.rangeX = rangeX;
+        const rangeY = maxY - minY || 1;
 
         ctx.beginPath();
         ctx.strokeStyle = color;
         ctx.lineWidth = 2;
 
         for (let i = 0; i < len; i++) {
-            const x = (i / (len - 1)) * this.width;
-            const normY = (values[i] - min) / range;
-            const y = this.height - normY * this.height;
+            const [xVal, yVal] = points[i];
+
+            const x = ((xVal - minX) / rangeX) * this.width;
+            const y = this.height - ((yVal - minY) / rangeY) * this.height;
 
             if (i === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
@@ -85,11 +97,10 @@ export class Plotter {
 
     mousemove(e) {
         const rect = this.canvas.getBoundingClientRect();
-        const x = Math.floor(e.clientX - rect.left);
+        const scaleX = this.canvas.width / rect.width;
+        const x = (e.clientX - rect.left) * scaleX;
         const relX = x / this.canvas.width;
         const video = document.querySelector("#VIDEO_PREVIEW");
-        if (video?.duration) {
-            video.currentTime = video.duration * relX;
-        }
+        video.currentTime = this.minX + this.rangeX * relX;
     }
 }

